@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ title if title else "Clinical Appointment Booking" }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- BOXICONS -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+  <!-- CSS (force-refresh using version parameter) -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=4">
+</head>
+
+<body>
+
+<!-- ========================= HEADER ========================= -->
+<header class="topbar">
+  <div class="brand">
+    <i class='bx bx-plus-medical'></i> Clinical Appointment Booking
+  </div>
+
+  <nav class="topnav">
+    {% if session.get('user_type') %}
+      <span class="welcome">Hello, {{ session.get('user_name') }}</span>
+      <a href="{{ url_for('logout') }}" class="btn small">Logout</a>
+    {% endif %}
+  </nav>
+</header>
+
+<!-- ========================= MAIN ========================= -->
+<div class="main-container">
+
+  <!-- FLASH MESSAGES -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-wrapper">
+        {% for category, msg in messages %}
+          <div class="flash {{ category }}">
+            <i class='bx bx-info-circle'></i> {{ msg }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <!-- PAGE CONTENT -->
+  {% block content %}{% endblock %}
+
+</div>
+
+<!-- ========================= FOOTER ========================= -->
+<footer class="footer">
+  © 2025 Clinical Appointment Booking System
+</footer>
+
+</body>
+</html>

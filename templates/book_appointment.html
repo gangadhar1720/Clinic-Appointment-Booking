@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="dashboard">
+
+  <aside class="sidebar">
+    <ul>
+      <li><a href="{{ url_for('book_appointment') }}"><i class='bx bx-calendar'></i> Book Appointment</a></li>
+      <li><a href="{{ url_for('view_bookings_patient') }}"><i class='bx bx-file'></i> View Bookings</a></li>
+      <li><a href="{{ url_for('patient_profile') }}"><i class='bx bx-user'></i> Profile</a></li>
+    </ul>
+  </aside>
+
+  <section class="content full">
+
+    <div class="search-box">
+      <form method="get">
+        <input type="text" name="q" placeholder="Search doctors by name, specialization, city..." value="{{ q }}">
+        <button class="btn primary"><i class='bx bx-search'></i></button>
+      </form>
+    </div>
+
+    <div class="doctor-grid">
+      {% for d in doctors %}
+      <div class="doctor-card">
+        <h3>{{ d.name }}</h3>
+        <p class="sub">{{ d.specialization }} • {{ d.clinic_location }}</p>
+        <p>Upcoming Slots: <b>{{ d.upcoming_slots }}</b></p>
+        <button class="btn outline" onclick="showAvail({{ d.id }}, '{{ d.name }}')">View Slots</button>
+      </div>
+      {% else %}
+        <p>No doctors found.</p>
+      {% endfor %}
+    </div>
+
+    <!-- Modal -->
+    <div id="availModal" class="modal">
+      <div class="modal-body">
+        <span class="close" onclick="hideModal()">×</span>
+        <h2 id="modalTitle"></h2>
+        <div id="availList"></div>
+        <form id="bookingForm" action="{{ url_for('patient_book_action') }}" method="POST">
+    <input type="hidden" name="doctor_id" id="booking_doctor_id">
+    <input type="hidden" name="date" id="booking_date">
+    <input type="hidden" name="time" id="booking_time">
+    <button type="submit" class="btn primary w-100">Confirm Booking</button>
+</form>
+
+      </div>
+    </div>
+
+  </section>
+
+</div>
+
+<script>
+function showAvail(id, name) {
+
+  // Set doctor ID immediately
+  document.getElementById("booking_doctor_id").value = id;
+  document.getElementById("booking_date").value = "";
+  document.getElementById("booking_time").value = "";
+
+  document.getElementById("modalTitle").innerText = "Availability for Dr. " + name;
+
+  fetch(`/doctor/${id}/availabilities`)
+  .then(res => res.json())
+  .then(data => {
+
+    let box = document.getElementById("availList");
+    box.innerHTML = "";
+
+    if (data.length === 0) {
+      box.innerHTML = "<p>No slots available.</p>";
+    }
+
+    data.forEach(slot => {
+
+      let btn = document.createElement("button");
+      btn.className = "slot-btn";
+      btn.type = "button";
+      btn.innerText = `${slot.date} • ${slot.start_time} (${slot.slots} left)`;
+
+      btn.onclick = function () {
+
+        // Fill hidden fields correctly
+        document.getElementById("booking_date").value = slot.date;
+        document.getElementById("booking_time").value = slot.start_time;
+
+        // Highlight active selection
+        document.querySelectorAll('.slot-btn').forEach(b => {
+          b.style.background = "#49a8f5";
+        });
+        this.style.background = "#6a5acd";
+      };
+
+      box.appendChild(btn);
+    });
+
+    // SHOW MODAL
+    document.getElementById("availModal").style.display = "flex";
+
+  });
+}
+
+function hideModal() {
+  document.getElementById("availModal").style.display = "none";
+}
+
+
+// Prevent submit if fields are empty
+document.getElementById("bookingForm").onsubmit = function(e) {
+
+  let doctor = document.getElementById("booking_doctor_id").value;
+  let date = document.getElementById("booking_date").value;
+  let time = document.getElementById("booking_time").value;
+
+  if (!doctor || !date || !time) {
+    alert("⚠ Please select a slot before booking.");
+    e.preventDefault();
+    return false;
+  }
+
+  return true;
+};
+</script>
+
+{% endblock %}

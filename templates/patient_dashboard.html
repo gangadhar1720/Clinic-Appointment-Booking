@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="dashboard">
+
+  <aside class="sidebar">
+    <ul>
+      <li><a href="{{ url_for('book_appointment') }}"><i class='bx bx-calendar-plus'></i> Book Appointment</a></li>
+      <li><a href="{{ url_for('view_bookings_patient') }}"><i class='bx bx-file'></i> View Bookings</a></li>
+      <li><a href="{{ url_for('patient_profile') }}"><i class='bx bx-user-circle'></i> Profile</a></li>
+    </ul>
+  </aside>
+
+  <section class="content">
+    <div class="hero-card">
+      <h2>Welcome, {{ name }} 👋</h2>
+      <p>Manage your medical appointments easily and quickly.</p>
+    </div>
+  </section>
+
+</div>
+{% endblock %}

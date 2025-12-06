@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="dashboard">
+
+  <aside class="sidebar">
+    <ul>
+      <li><a href="{{ url_for('doctor_add_availability') }}"><i class='bx bx-time'></i> Add Availability</a></li>
+      <li><a href="{{ url_for('doctor_view_appointments') }}"><i class='bx bx-list-check'></i> View Appointments</a></li>
+      <li><a href="{{ url_for('doctor_profile') }}"><i class='bx bx-user'></i> Profile</a></li>
+    </ul>
+  </aside>
+
+  <section class="content">
+    <div class="hero-card">
+      <h2>Welcome, Dr. {{ name }}</h2>
+      <p>Manage your schedule, view appointments & update availability.</p>
+    </div>
+  </section>
+
+</div>
+{% endblock %}

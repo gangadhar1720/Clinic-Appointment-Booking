@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="auth-container">
+  <div class="auth-card">
+
+    <h2 class="auth-title">Login</h2>
+
+    <form method="POST" class="auth-form">
+
+      <label class="auth-label">Email or Mobile</label>
+      <input type="text" name="identifier" class="auth-input" required placeholder="Enter email or mobile">
+
+      <label class="auth-label">Password</label>
+      <input type="password" name="password" class="auth-input" required placeholder="Enter password">
+
+      <button class="btn primary auth-btn">Login</button>
+    </form>
+
+    <div class="auth-links">
+      <p>New patient?  
+        <a href="{{ url_for('register_patient') }}">Register here</a>
+      </p>
+
+      <p>Doctor?  
+        <a href="{{ url_for('register_doctor') }}">Register here</a>
+      </p>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

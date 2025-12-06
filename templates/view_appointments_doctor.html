@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="dashboard">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <ul>
+      <li><a href="{{ url_for('doctor_add_availability') }}"><i class='bx bx-time'></i> Add Availability</a></li>
+      <li><a href="{{ url_for('doctor_view_appointments') }}"><i class='bx bx-list-check'></i> View Appointments</a></li>
+      <li><a href="{{ url_for('doctor_profile') }}"><i class='bx bx-user'></i> Profile</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <section class="content">
+
+    <div class="hero-card">
+      <h2>Appointments</h2>
+      <p>Track your patient visits</p>
+    </div>
+
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Patient</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for a in bookings %}
+        <tr>
+          <td>{{ a.id }}</td>
+          <td>{{ a.patient_name }}<br><small>{{ a.patient_mobile }}</small></td>
+          <td>{{ a.date }}</td>
+          <td>{{ a.time }}</td>
+
+          <td>
+            {% if a.status == 'booked' %}
+              <span class="status-booked">BOOKED</span>
+            {% elif a.status == 'rescheduled' %}
+              <span class="status-rescheduled">RESCHEDULED</span>
+            {% elif a.status == 'cancelled' %}
+              <span class="status-cancelled">CANCELLED</span>
+            {% else %}
+              <span class="status-completed">COMPLETED</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </section>
+
+</div>
+{% endblock %}

@@ -1,0 +1,463 @@
+/* ===========================================================
+   GLOBAL COLORS & VARIABLES
+   =========================================================== */
+:root {
+  --primary: #6a5acd;
+  --secondary: #49a8f5;
+  --bg: #f3f6ff;
+  --white: #ffffff;
+  --dark: #333;
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* ===========================================================
+   RESET & BODY
+   =========================================================== */
+body {
+  margin: 0;
+  background: var(--bg);
+  font-family: "Segoe UI", sans-serif;
+  color: var(--dark);
+}
+
+/* ===========================================================
+   HEADER
+   =========================================================== */
+.topbar {
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.15rem;
+  box-shadow: var(--shadow);
+}
+
+.brand {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ===========================================================
+   MAIN CONTAINER
+   =========================================================== */
+.main-container {
+  padding: 20px;
+}
+
+/* ===========================================================
+   FLASH MESSAGES
+   =========================================================== */
+.flash-wrapper {
+  margin-bottom: 20px;
+}
+
+.flash {
+  background: white;
+  padding: 12px;
+  margin-bottom: 8px;
+  border-left: 5px solid;
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+}
+
+.flash.success { border-color: #4caf50; }
+.flash.danger { border-color: #f44336; }
+.flash.info { border-color: #2196f3; }
+
+/* ===========================================================
+   DASHBOARD LAYOUT
+   =========================================================== */
+.dashboard {
+  display: flex;
+  min-height: 80vh;
+  gap: 20px;
+}
+
+/* ===========================================================
+   SIDEBAR
+   =========================================================== */
+.sidebar {
+  width: 260px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+  border-radius: 10px;
+  padding: 20px 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin-bottom: 5px;
+}
+
+.sidebar a {
+  display: block;
+  padding: 15px 25px;
+  color: var(--dark);
+  text-decoration: none;
+  font-size: 1rem;
+  border-radius: 8px;
+}
+
+.sidebar a:hover {
+  background: var(--bg);
+  border-left: 4px solid var(--primary);
+}
+
+/* ===========================================================
+   CONTENT AREA
+   =========================================================== */
+.content {
+  flex: 1;
+  padding: 10px;
+}
+
+.full {
+  width: 100%;
+}
+
+/* ===========================================================
+   HERO CARD (PAGE HEADER CARD)
+   =========================================================== */
+.hero-card {
+  background: white;
+  padding: 25px 30px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: var(--shadow);
+}
+
+.hero-card h2 {
+  margin: 0 0 8px 0;
+}
+
+/* ===========================================================
+   PROFILE CARD / FORM CARD
+   =========================================================== */
+.profile-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  max-width: 600px;
+}
+
+.profile-card label {
+  margin-top: 12px;
+  display: block;
+}
+
+/* ===========================================================
+   INPUTS & FORM ELEMENTS
+   =========================================================== */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 6px;
+  font-size: 0.95rem;
+}
+
+button, .btn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn.outline {
+  background: none;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+.btn.small {
+  padding: 7px 12px;
+  font-size: 0.8rem;
+}
+
+.btn.danger {
+  background: #e53935;
+  color: white;
+}
+
+/* ===========================================================
+   SEARCH BAR
+   =========================================================== */
+.search-box {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+}
+
+.search-box form {
+  display: flex;
+  gap: 10px;
+}
+
+.search-box input {
+  flex: 1;
+}
+
+/* ===========================================================
+   DOCTOR GRID & CARDS
+   =========================================================== */
+.doctor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.doctor-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.doctor-card h3 {
+  margin-top: 0;
+}
+
+.sub {
+  color: #666;
+  margin-bottom: 6px;
+}
+
+/* ===========================================================
+   SLOT BUTTONS
+   =========================================================== */
+.slot-btn {
+  display: block;
+  width: 100%;
+  margin: 6px 0;
+  padding: 12px;
+  background: var(--secondary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* ===========================================================
+   MODAL
+   =========================================================== */
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-body {
+  background: white;
+  width: 420px;
+  padding: 25px;
+  border-radius: 12px;
+  position: relative;
+  box-shadow: var(--shadow);
+}
+
+.close {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* ===========================================================
+   TABLE STYLING (MODERN)
+   =========================================================== */
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-top: 20px;
+}
+
+.styled-table thead {
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  color: white;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 14px 18px;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.styled-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.styled-table tbody tr:hover {
+  background: #f4f6ff;
+  transition: 0.2s ease-in-out;
+}
+
+/* ===========================================================
+   STATUS BADGES
+   =========================================================== */
+.status-booked {
+  background: #4caf50;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+}
+
+.status-rescheduled {
+  background: #ff9800;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+}
+
+.status-cancelled {
+  background: #e53935;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+}
+
+.status-completed {
+  background: #2196f3;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+}
+
+/* ===========================================================
+   SMALL ROW ACTION BUTTONS
+   =========================================================== */
+.tbl-action-btn {
+  padding: 7px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.tbl-action-btn.cancel {
+  background: #e53935;
+  color: white;
+}
+
+.tbl-action-btn.reschedule {
+  background: var(--primary);
+  color: white;
+}
+
+/* ===========================================================
+   FOOTER
+   =========================================================== */
+.footer {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  margin-top: 20px;
+}
+
+/* =========================== */
+/* AUTH PAGES (Login/Register) */
+/* =========================== */
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+}
+
+.auth-card {
+  background: white;
+  width: 380px;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+}
+
+.auth-card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--primary);
+}
+
+.auth-card label {
+  display: block;
+  margin-top: 12px;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  margin-top: 6px;
+}
+
+.auth-card .btn {
+  width: 100%;
+  margin-top: 18px;
+}
+
+.auth-links {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.auth-links a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+/* Flash Animation */
+.flash {
+  animation: fadeIn 0.4s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}

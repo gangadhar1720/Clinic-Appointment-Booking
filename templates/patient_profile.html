@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="dashboard">
+
+  <aside class="sidebar">
+    <ul>
+      <li><a href="{{ url_for('book_appointment') }}"><i class='bx bx-calendar-plus'></i> Book Appointment</a></li>
+      <li><a href="{{ url_for('view_bookings_patient') }}"><i class='bx bx-file'></i> View Bookings</a></li>
+      <li><a href="{{ url_for('patient_profile') }}"><i class='bx bx-user-circle'></i> Profile</a></li>
+    </ul>
+  </aside>
+
+  <section class="content">
+
+    <div class="hero-card">
+      <h2>Patient Profile</h2>
+      <p>Review your personal information</p>
+    </div>
+
+    <div class="profile-card">
+      <p><strong>Name:</strong> {{ user.name }}</p>
+      <p><strong>Age:</strong> {{ user.age }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Mobile:</strong> {{ user.mobile }}</p>
+      <p><strong>Joined:</strong> {{ user.created_at }}</p>
+    </div>
+
+  </section>
+
+</div>
+{% endblock %}

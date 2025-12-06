@@ -1,0 +1,7 @@
+Flask==2.2.5
+mysql-connector-python==8.1.0
+python-dotenv==1.0.0
+werkzeug==2.3.6
+requests==2.31.0
+# Optional for Twilio
+twilio==8.0.0

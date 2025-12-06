@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="dashboard">
+
+  <aside class="sidebar">
+    <ul>
+      <li><a href="{{ url_for('doctor_add_availability') }}"><i class='bx bx-time'></i> Add Availability</a></li>
+      <li><a href="{{ url_for('doctor_view_appointments') }}"><i class='bx bx-list-check'></i> View Appointments</a></li>
+      <li><a href="{{ url_for('doctor_profile') }}"><i class='bx bx-user'></i> Profile</a></li>
+    </ul>
+  </aside>
+
+  <section class="content">
+
+    <div class="hero-card">
+      <h2>Add Availability</h2>
+      <p>Define your consultation timings</p>
+    </div>
+
+    <div class="profile-card">
+      <form method="POST">
+        <label>Date</label>
+        <input type="date" name="date" required>
+
+        <label>Start Time</label>
+        <input type="time" name="start_time" required>
+
+        <label>End Time</label>
+        <input type="time" name="end_time" required>
+
+        <label>Slots</label>
+        <input type="number" name="slots" min="1" value="1" required>
+
+        <button class="btn primary">Add Availability</button>
+      </form>
+    </div>
+
+  </section>
+
+</div>
+{% endblock %}

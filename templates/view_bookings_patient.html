@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="dashboard">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <ul>
+      <li><a href="{{ url_for('book_appointment') }}"><i class='bx bx-calendar-plus'></i> Book Appointment</a></li>
+      <li><a href="{{ url_for('view_bookings_patient') }}"><i class='bx bx-file'></i> View Bookings</a></li>
+      <li><a href="{{ url_for('patient_profile') }}"><i class='bx bx-user-circle'></i> Profile</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <section class="content">
+
+    <div class="hero-card">
+      <h2>Your Appointments</h2>
+      <p>View, reschedule or cancel your bookings</p>
+    </div>
+
+    <!-- TABLE -->
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Doctor</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for b in bookings %}
+        <tr>
+          <td>{{ b.id }}</td>
+          <td>{{ b.doctor_name }}<br><small>{{ b.specialization }}</small></td>
+          <td>{{ b.date }}</td>
+          <td>{{ b.time }}</td>
+
+          <td>
+            {% if b.status == 'booked' %}
+              <span class="status-booked">BOOKED</span>
+            {% elif b.status == 'rescheduled' %}
+              <span class="status-rescheduled">RESCHEDULED</span>
+            {% elif b.status == 'cancelled' %}
+              <span class="status-cancelled">CANCELLED</span>
+            {% else %}
+              <span class="status-completed">COMPLETED</span>
+            {% endif %}
+          </td>
+
+          <td>
+
+            {% if b.status != 'cancelled' and b.status != 'completed' %}
+            <!-- Cancel -->
+            <form method="POST" action="{{ url_for('booking_action', appointment_id=b.id) }}" style="display:inline-block;">
+              <input type="hidden" name="action" value="cancel">
+              <button class="tbl-action-btn cancel">Cancel</button>
+            </form>
+
+            <!-- Reschedule -->
+            <button class="tbl-action-btn reschedule" onclick="openReschedule({{ b.id }})">Reschedule</button>
+            {% else %}
+            <em>N/A</em>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <!-- Reschedule Panel -->
+    <div id="reschedule-card" class="profile-card" style="display:none; margin-top:20px;">
+      <h3>Reschedule Appointment</h3>
+      <form method="POST" id="resForm">
+        <label>New Date</label>
+        <input type="date" name="new_date" required>
+
+        <label>New Time</label>
+        <input type="time" name="new_time" required>
+
+        <button class="btn primary" type="submit">Reschedule</button>
+      </form>
+    </div>
+
+  </section>
+
+</div>
+
+<script>
+function openReschedule(id){
+  const form = document.getElementById('resForm');
+  form.action = "/patient/booking_action/" + id;
+
+  // Add the hidden action input
+  let hidden = document.createElement("input");
+  hidden.type = "hidden";
+  hidden.name = "action";
+  hidden.value = "reschedule";
+  form.appendChild(hidden);
+
+  document.getElementById("reschedule-card").style.display = "block";
+}
+</script>
+
+{% endblock %}
