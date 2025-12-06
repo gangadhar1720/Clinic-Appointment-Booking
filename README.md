@@ -28,29 +28,4 @@ The system provides an easy-to-use interface for searching doctors, viewing avai
 - Fully responsive and modern UI  
 - Flask–MySQL backend integration  
 
----
-
-## 📂 Project Folder Structure
-
-Clinic-Appointment-Booking/
-│
-├── app.py
-├── requirements.txt
-├── .gitignore
-├── .env (not included in GitHub)
-│
-├── static/
-│ └── style.css
-│
-├── templates/
-│ ├── base.html
-│ ├── login.html
-│ ├── register_patient.html
-│ ├── register_doctor.html
-│ ├── patient_dashboard.html
-│ ├── doctor_dashboard.html
-│ ├── book_appointment.html
-│ ├── add_availability.html
-│ ├── view_bookings_patient.html
-│ └── view_appointments_doctor.html
 
